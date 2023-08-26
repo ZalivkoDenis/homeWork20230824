@@ -31,8 +31,13 @@ def task_3_2(text: str) -> int:
     return counter
 
 
-def task_3_3(text: str) -> list[str]:
-    return sorted([clear_str(ss) for ss in text.split()], key=lambda ss: len(ss), reverse=True)[0:3:]
+def task_3_3(text: str):
+    words_weight = {}
+    for _ in [clear_str(ss) for ss in text.split()]:
+        words_weight[_] = len(_)
+    return sorted(words_weight.items(),
+                  key=lambda item: -item[1],
+                  )[0:3]
 
 
 if __name__ == "__main__":
@@ -46,7 +51,6 @@ if __name__ == "__main__":
     print('Количество слов в тексте:', task_3_2(data))
     print('Три самых длинных слова:', task_3_3(data))
 
-
 #
 # Обрабатываемый текст из файла "text_for_03.txt":
 # ----------------------------------------
@@ -58,7 +62,7 @@ if __name__ == "__main__":
 # ----------------------------------------
 # Количество предложений в тексте: 4
 # Количество слов в тексте: 50
-# Три самых длинных слова: ['аргументов', 'заслуживают', 'информацию']
+# Три самых длинных слова: [('заслуживают', 11), ('информацию', 10), ('аргументов', 10)]
 #
 # Process finished with exit code 0
 #
